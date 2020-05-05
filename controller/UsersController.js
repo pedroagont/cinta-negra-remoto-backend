@@ -16,5 +16,14 @@ module.exports = {
     } catch (err) {
       res.status(400).send({ message: 'Users not found', err })
     }
+  },
+  findById: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const user = await UsersService.findById(id);
+      res.status(201).send(user);
+    } catch (err) {
+      res.status(400).send({ message: 'User not found', err })
+    }
   }
 }
