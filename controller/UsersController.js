@@ -36,5 +36,15 @@ module.exports = {
     } catch (err) {
       res.status(400).send({ message: 'User not found', err })
     }
-  }
+  },
+  findByIdAndDelete: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const user = await UsersService.findById(id);
+      await UsersService.update(user, { is_active: false });
+      res.status(204).send();
+    } catch (err) {
+      res.status(400).send({ message: 'User not found', err })
+    }
+  },
 }
