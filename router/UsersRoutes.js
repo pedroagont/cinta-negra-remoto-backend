@@ -13,4 +13,7 @@ router.get('/users', UsersController.find);
 // GET (ONE)
 router.get('/users/:id', UsersController.findById);
 
+// PATCH
+router.patch('/users/:id', UsersController.findByIdAndUpdate);
+
 module.exports = router;
