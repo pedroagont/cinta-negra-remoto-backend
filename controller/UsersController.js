@@ -12,7 +12,7 @@ module.exports = {
   find: async (req, res) => {
     try {
       const user = await UsersService.find();
-      res.status(201).send(user);
+      res.status(200).send(user);
     } catch (err) {
       res.status(400).send({ message: 'Users not found', err })
     }
@@ -21,7 +21,7 @@ module.exports = {
     const { id } = req.params;
     try {
       const user = await UsersService.findById(id);
-      res.status(201).send(user);
+      res.status(200).send(user);
     } catch (err) {
       res.status(400).send({ message: 'User not found', err })
     }
