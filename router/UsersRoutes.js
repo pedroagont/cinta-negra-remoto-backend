@@ -22,4 +22,7 @@ router.delete('/users/:id', UsersController.findByIdAndDelete);
 // SIGNUP
 router.post('/users/signup', UsersController.signup)
 
+// LOGIN
+router.post('/users/login', UsersController.login)
+
 module.exports = router;
