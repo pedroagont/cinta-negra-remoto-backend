@@ -47,4 +47,12 @@ module.exports = {
       res.status(400).send({ message: 'User not found', err })
     }
   },
+  signup: async (req, res) => {
+    try {
+      const user = await UsersService.create(req.body);
+      res.status(201).send({ message: 'Sign up successful', user });
+    } catch (err) {
+      res.status(400).send({ message: 'Failed to sign up', err })
+    }
+  },
 }

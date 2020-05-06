@@ -19,4 +19,7 @@ router.patch('/users/:id', UsersController.findByIdAndUpdate);
 // DELETE
 router.delete('/users/:id', UsersController.findByIdAndDelete);
 
+// SIGNUP
+router.post('/users/signup', UsersController.signup)
+
 module.exports = router;
