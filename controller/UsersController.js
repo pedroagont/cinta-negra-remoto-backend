@@ -1,4 +1,5 @@
 const { UsersService } = require('../services');
+const utils = require('../utils');
 
 module.exports = {
   create: async (req, res) => {
@@ -62,8 +63,12 @@ module.exports = {
       if (!user) res.status(404).send({ message: 'User not found', err });
       const isMatch = UsersService.comparePassword(password, user.password);
       if (!isMatch) res.status(400).send({ message: 'Invalid credentials', err });
-      // TODO: Devolver el JWT
-      res.status(201).send({ message: 'Log in successful', user });
+      const token = utils.createToken({
+        id: user._id,
+        name: user.first_name,
+        email: user.email,
+      });
+      res.status(200).send({ message: 'Log in successful', token });
     } catch (err) {
       res.status(400).send({ message: 'Failed to log in', err })
     }
