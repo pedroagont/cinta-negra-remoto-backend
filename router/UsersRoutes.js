@@ -6,38 +6,24 @@ const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
   try {
-    const { authorization } = req.headers;
     const token = authorization.split(' ')[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.decoded = decoded;
     next();
-  } catch (err) {
-    res.status(403).send({ message: ' Error with token', err })
+  } catch (error) {
+    res.status(403).send({ error })
   }
 }
 
+router.post('/users/signup', UsersController.signup);
+router.post('/users/login', UsersController.login);
 
-// CRUD Usuario
+router.use(verifyToken);
 
-// CREATE
 router.post('/users', UsersController.create);
-
-// GET (ALL)
-router.get('/users', verifyToken, UsersController.find);
-
-// GET (ONE)
+router.get('/users', UsersController.find);
 router.get('/users/:id', UsersController.findById);
-
-// PATCH
 router.patch('/users/:id', UsersController.findByIdAndUpdate);
-
-// DELETE
 router.delete('/users/:id', UsersController.findByIdAndDelete);
-
-// SIGNUP
-router.post('/users/signup', UsersController.signup)
-
-// LOGIN
-router.post('/users/login', UsersController.login)
 
 module.exports = router;
